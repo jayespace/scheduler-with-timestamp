@@ -24,7 +24,7 @@ func CreateSchedule(c *gin.Context) {
 
 	date := time.Now().Format("2006-01-02")
 
-	schedule := models.Schedule{Date: date}
+	schedule := models.Schedule{DateLocal: date}
 	result := initializers.DB.Create(&schedule)
 
 	if result.Error != nil {
@@ -43,7 +43,7 @@ func FindAllSchedule(c *gin.Context) {
 
 	// Find schedules on the same date and order by created_at field in ascending order
 	var schedules []models.Schedule
-	initializers.DB.Where("date = ?", date).Order("created_at asc").Find(&schedules)
+	initializers.DB.Where("date_local = ?", date).Order("created_at asc").Find(&schedules)
 
 	// Format the return data
 	type ScheduleResponse struct {
