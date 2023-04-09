@@ -21,5 +21,7 @@ func main() {
 	r.PATCH("/schedules/:id", controllers.UpdateDescription)
 	r.DELETE("/schedules/:id", controllers.DeleteSchedule)
 
+	r.POST("/users", controllers.CreateUser)
+
 	r.Run()
 }
