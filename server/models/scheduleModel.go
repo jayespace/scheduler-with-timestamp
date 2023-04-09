@@ -10,6 +10,6 @@ type Schedule struct {
 	DurationInMin int
 	Description   string
 	Done          bool `default:"false"`
-	// UserID        uint `gorm:"ForeignKey:ID"`
+	UserID        uint `gorm:"ForeignKey:ID"`
 	// User          User `gorm:"foreignKey:UserID"`
 }

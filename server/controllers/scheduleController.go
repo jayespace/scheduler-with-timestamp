@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 
@@ -10,9 +11,12 @@ import (
 )
 
 func CreateSchedule(c *gin.Context) {
+	// Get login user info
+	user, _ := c.Get("user")
+	userId := user.(models.User).ID
 
 	var checkSchedule models.Schedule
-	lastEntry := initializers.DB.Last(&checkSchedule)
+	lastEntry := initializers.DB.Where("user_id = ?", userId).Last(&checkSchedule)
 	checkStatus := checkSchedule.Done
 
 	if lastEntry.Error == nil && !checkStatus {
@@ -24,7 +28,7 @@ func CreateSchedule(c *gin.Context) {
 
 	date := time.Now().Format("2006-01-02")
 
-	schedule := models.Schedule{DateLocal: date}
+	schedule := models.Schedule{DateLocal: date, UserID: userId}
 	result := initializers.DB.Create(&schedule)
 
 	if result.Error != nil {
@@ -37,13 +41,17 @@ func CreateSchedule(c *gin.Context) {
 	})
 }
 
-func FindAllSchedule(c *gin.Context) {
+func FindSchedules(c *gin.Context) {
+	// Get login user info
+	user, _ := c.Get("user")
+	userId := user.(models.User).ID
+
 	// Find Current date
 	date := time.Now().Format("2006-01-02")
 
 	// Find schedules on the same date and order by created_at field in ascending order
 	var schedules []models.Schedule
-	initializers.DB.Where("date_local = ?", date).Order("created_at asc").Find(&schedules)
+	initializers.DB.Where("date_local = ? AND user_id = ?", date, userId).Order("created_at asc").Find(&schedules)
 
 	// Format the return data
 	type ScheduleResponse struct {
@@ -83,6 +91,10 @@ func FindAllSchedule(c *gin.Context) {
 }
 
 func UpdateDescription(c *gin.Context) {
+	// Get login user info
+	user, _ := c.Get("user")
+	userId := user.(models.User).ID
+
 	// Get id off url
 	id := c.Param("id")
 
@@ -95,7 +107,7 @@ func UpdateDescription(c *gin.Context) {
 
 	// Get the posts
 	var schedule models.Schedule
-	error := initializers.DB.First(&schedule, id).Error
+	error := initializers.DB.Where("user_id = ?", userId).First(&schedule, id).Error
 
 	if error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -114,9 +126,13 @@ func UpdateDescription(c *gin.Context) {
 }
 
 func UpdateEndTime(c *gin.Context) {
+	// Get login user info
+	user, _ := c.Get("user")
+	userId := user.(models.User).ID
 
 	var schedule models.Schedule
-	lastEntry := initializers.DB.Last(&schedule)
+	lastEntry := initializers.DB.Where("user_id = ?", userId).Last(&schedule)
+	fmt.Println("error is", lastEntry.Error)
 
 	if lastEntry.Error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -154,12 +170,16 @@ func UpdateEndTime(c *gin.Context) {
 }
 
 func DeleteSchedule(c *gin.Context) {
+	// Get login user info
+	user, _ := c.Get("user")
+	userId := user.(models.User).ID
+
 	// Get the id off the url
 	id := c.Param("id")
 
 	// Get the posts
 	var schedule models.Schedule
-	error := initializers.DB.First(&schedule, id).Error
+	error := initializers.DB.Where("user_id = ?", userId).First(&schedule, id).Error
 
 	if error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
