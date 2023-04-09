@@ -24,7 +24,7 @@ func CreateSchedule(c *gin.Context) {
 
 	date := time.Now().Format("2006-01-02")
 
-	schedule := models.Schedule{Date: date}
+	schedule := models.Schedule{DateLocal: date}
 	result := initializers.DB.Create(&schedule)
 
 	if result.Error != nil {
@@ -95,7 +95,14 @@ func UpdateDescription(c *gin.Context) {
 
 	// Get the posts
 	var schedule models.Schedule
-	initializers.DB.First(&schedule, id)
+	error := initializers.DB.First(&schedule, id).Error
+
+	if error != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "schedule not found",
+		})
+		return
+	}
 
 	// Update it
 	initializers.DB.Model(&schedule).Updates(models.Schedule{Description: body.Description})
