@@ -22,7 +22,9 @@ func CreateSchedule(c *gin.Context) {
 		return
 	}
 
-	schedule := models.Schedule{}
+	date := time.Now().Format("2006-01-02")
+
+	schedule := models.Schedule{Date: date}
 	result := initializers.DB.Create(&schedule)
 
 	if result.Error != nil {
@@ -31,7 +33,7 @@ func CreateSchedule(c *gin.Context) {
 	}
 	// Return it
 	c.JSON(200, gin.H{
-		"status": "created one",
+		"status": "success",
 	})
 }
 
@@ -39,12 +41,9 @@ func FindAllSchedule(c *gin.Context) {
 	// Find Current date
 	date := time.Now().Format("2006-01-02")
 
-	// Find all schedules
-	var schedules []models.Schedule
-	initializers.DB.Find(&schedules)
-
 	// Find schedules on the same date and order by created_at field in ascending order
-	// initializers.DB.Where("DATE(created_at) = ?", date).Order("created_at asc").Find(&schedules)
+	var schedules []models.Schedule
+	initializers.DB.Where("date = ?", date).Order("created_at asc").Find(&schedules)
 
 	// Format the return data
 	type ScheduleResponse struct {
@@ -167,6 +166,6 @@ func DeleteSchedule(c *gin.Context) {
 
 	// Respond with it
 	c.JSON(200, gin.H{
-		"status": "deleted",
+		"status": "Deletion Completed",
 	})
 }
