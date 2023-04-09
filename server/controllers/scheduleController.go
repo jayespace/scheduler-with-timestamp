@@ -95,7 +95,14 @@ func UpdateDescription(c *gin.Context) {
 
 	// Get the posts
 	var schedule models.Schedule
-	initializers.DB.First(&schedule, id)
+	error := initializers.DB.First(&schedule, id).Error
+
+	if error != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "schedule not found",
+		})
+		return
+	}
 
 	// Update it
 	initializers.DB.Model(&schedule).Updates(models.Schedule{Description: body.Description})
