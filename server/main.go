@@ -21,7 +21,8 @@ func main() {
 	r.PATCH("/schedules/:id", controllers.UpdateDescription)
 	r.DELETE("/schedules/:id", controllers.DeleteSchedule)
 
-	r.POST("/users", controllers.CreateUser)
+	r.POST("/signup", controllers.CreateUser)
+	r.POST("/login", controllers.LogInUser)
 
 	r.Run()
 }
