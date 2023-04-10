@@ -46,20 +46,13 @@ func FindSchedules(c *gin.Context) {
 	user, _ := c.Get("user")
 	userId := user.(models.User).ID
 
-	// Find Current date
-	date := time.Now().Format("2006-01-02")
+	// Find Current date and check if there is requested date in query
+	dateNow := time.Now().Format("2006-01-02")
+	dateRequested := c.DefaultQuery("date", dateNow)
 
+	// Find user data matches the requested date
 	var schedules []models.Schedule
-
-	// Find query
-	if queryDate := c.Query("date"); queryDate != "" {
-		// Find schedules on the requested date and order by created_at field in ascending order
-		initializers.DB.Where("date_local = ? AND user_id = ?", queryDate, userId).Order("created_at asc").Find(&schedules)
-		date = queryDate
-	} else {
-
-		initializers.DB.Where("user_id = ?", userId).Order("created_at asc").Find(&schedules)
-	}
+	initializers.DB.Where("date_local = ? AND user_id = ?", dateRequested, userId).Order("created_at asc").Find(&schedules)
 
 	// Format the return data
 	type ScheduleResponse struct {
@@ -93,7 +86,7 @@ func FindSchedules(c *gin.Context) {
 
 	// Respond with them
 	c.JSON(200, gin.H{
-		"date":      date,
+		"date":      dateRequested,
 		"schedules": response,
 	})
 }
