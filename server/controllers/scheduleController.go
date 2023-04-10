@@ -49,9 +49,17 @@ func FindSchedules(c *gin.Context) {
 	// Find Current date
 	date := time.Now().Format("2006-01-02")
 
-	// Find schedules on the same date and order by created_at field in ascending order
 	var schedules []models.Schedule
-	initializers.DB.Where("date_local = ? AND user_id = ?", date, userId).Order("created_at asc").Find(&schedules)
+
+	// Find query
+	if queryDate := c.Query("date"); queryDate != "" {
+		// Find schedules on the requested date and order by created_at field in ascending order
+		initializers.DB.Where("date_local = ? AND user_id = ?", queryDate, userId).Order("created_at asc").Find(&schedules)
+		date = queryDate
+	} else {
+
+		initializers.DB.Where("user_id = ?", userId).Order("created_at asc").Find(&schedules)
+	}
 
 	// Format the return data
 	type ScheduleResponse struct {
@@ -66,11 +74,11 @@ func FindSchedules(c *gin.Context) {
 	var response []ScheduleResponse
 
 	for _, s := range schedules {
-		createdTime := s.CreatedAt.Format("15:04")
+		createdTime := s.CreatedAt.Format("2006-01-02 15:04")
 
 		var endedTime string
 		if s.Done {
-			endedTime = s.EndedAt.Format("15:04")
+			endedTime = s.EndedAt.Format("2006-01-02 15:04")
 		}
 
 		response = append(response, ScheduleResponse{
@@ -85,7 +93,7 @@ func FindSchedules(c *gin.Context) {
 
 	// Respond with them
 	c.JSON(200, gin.H{
-		"dateNow":   date,
+		"date":      date,
 		"schedules": response,
 	})
 }
