@@ -18,7 +18,7 @@ func RequiredAuth(c *gin.Context) {
 
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
-			"error": "Need to Log in",
+			"error": "로그인이 필요합니다",
 		})
 	}
 
