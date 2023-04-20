@@ -98,7 +98,7 @@ func LogInUser(c *gin.Context) {
 	// Generate a jwt token
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"sub": user.ID,
-		"exp": time.Now().Add(time.Minute * 60).Unix(),
+		"exp": time.Now().Add(time.Minute * 30).Unix(),
 	})
 
 	// Sign and get the complete encoded token as a string using the secret
@@ -114,7 +114,7 @@ func LogInUser(c *gin.Context) {
 
 	// Set up the cookie and send it back
 	c.SetSameSite(http.SameSiteLaxMode)
-	c.SetCookie("Authorization", tokenString, 6000, "", "", false, true)
+	c.SetCookie("Authorization", tokenString, 1800, "/", "", false, true)
 
 	c.JSON(200, gin.H{
 		"status": "logged in",
@@ -133,7 +133,6 @@ func LogoutUser(c *gin.Context) {
 
 	// Remove the cookie by setting the value to an empty string and the expiration time to a past time
 	c.SetCookie("Authorization", "", -1, "/", "", false, true)
-	c.SetCookie("Username", "", -1, "/", "", false, true)
 
 	c.JSON(200, gin.H{
 		"status": "Log Out sucess",

@@ -5,6 +5,6 @@ echo "Building app..."
 npm run build
 
 echo "Deploying files to server..."
-scp -i ~/.ssh/ssh-key -r build/* jaye@34.168.137.190:/var/www/34.168.137.190/
+scp -i ~/.ssh/ssh-key -r build/* jaye@35.230.6.124:/var/www/35.230.6.124/
 
 echo "Done!"

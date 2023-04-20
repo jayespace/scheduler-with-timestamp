@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/jayespace/scheduler-with-timestamp/controllers"
@@ -17,22 +19,17 @@ func init() {
 func main() {
 	r := gin.Default()
 
-	// Enable CORS
-	// r.Use(func(c *gin.Context) {
-	// 	c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-	// 	c.Writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-	// 	c.Writer.Header().Set("Access-Control-Allow-Headers", "Origin, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
-	// 	if c.Request.Method == "OPTIONS" {
-	// 		c.AbortWithStatus(http.StatusNoContent)
-	// 		return
-	// 	}
-	// 	c.Next()
-	// })
-
 	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"http://localhost:3000"}
+	config.AllowOrigins = []string{os.Getenv("CLIENT_URL")}
 	config.AllowCredentials = true
-	r.Use(cors.New(config))
+	r.Use(cors.Default())
+
+	// r.Use(cors.New(cors.Config{
+	// 	AllowOrigins:     []string{os.Getenv("CLIENT_URL")},
+	// 	AllowMethods:     []string{"GET", "POST", "PATCH", "DELETE", "OPTIONS"},
+	// 	AllowHeaders:     []string{"content-Type", "Authorization"},
+	// 	AllowCredentials: true,
+	// }))
 
 	r.POST("api/schedules", middlewares.RequiredAuth, controllers.CreateSchedule)
 	r.GET("api/schedules", middlewares.RequiredAuth, controllers.GetSchedules)
@@ -42,7 +39,7 @@ func main() {
 
 	r.POST("api/users/signup", controllers.CreateUser)
 	r.POST("api/users/login", controllers.LogInUser)
-	r.POST("api/users/logout", controllers.LogoutUser)
+	r.POST("api/users/logout", middlewares.RequiredAuth, controllers.LogoutUser)
 
 	r.Run()
 }

@@ -2,6 +2,8 @@ import axios from 'axios';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
+// axios.defaults.withCredentials = true;
+
 async function get(endpoint, query='') {
   console.log(`GET 요청 ${`${apiUrl + endpoint}`}`);
 

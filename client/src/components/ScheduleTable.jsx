@@ -22,6 +22,7 @@ export default function ScheduleTable({ onUsernameChange }) {
   const getData = async(chosenDate) => {
     try {
       const { data } = await Api.get('/schedules', chosenDate);
+
       setSchedules(data.schedules);
 
       // Sort the dates in descending order

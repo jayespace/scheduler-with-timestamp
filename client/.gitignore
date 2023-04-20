@@ -1,4 +1,6 @@
 .env
+deploy.sh
+package-lock.json
 
 # dependencies
 /node_modules

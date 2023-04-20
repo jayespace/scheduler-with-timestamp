@@ -21,7 +21,6 @@ export default function Login() {
         const data = { username, password };
         await Api.post('/users/login', data)
         navigate('/scheduler', { replace: true });
-
       } catch (error) {
         console.log('로그인 실패', error);
         alert(error.response.data.error)
