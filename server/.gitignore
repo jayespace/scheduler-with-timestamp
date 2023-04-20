@@ -1,3 +1,4 @@
 .env
+.dockerignore
+.DS_Store
 go.sum
-scheduler-with-timestamp
