@@ -17,7 +17,7 @@ export default function NavBar({ name, status }) {
 
   return (
     <NavContainer>
-      <Link to = '/scheduler'>
+      <Link to = '/'>
         <Logo>Schedule Manager</Logo>
       </Link>
       <NavButtons>

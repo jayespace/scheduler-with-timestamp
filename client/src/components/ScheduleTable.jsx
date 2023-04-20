@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import styled from 'styled-components';
 import UpdateModal from './Update';
 import * as Api from '../api'
+import { Main, ScheduleControl } from './ScheduleTimer'
 
 export default function ScheduleTable({ onUsernameChange }) {
 
@@ -9,15 +10,6 @@ export default function ScheduleTable({ onUsernameChange }) {
   const [dateList, setDateList] = useState([]);
   const [dateChosen, setDateChosen] = useState([]);
   const [selectedSchedule, setSelectedSchedule] = useState(''); 
-  const [currentTime, setCurrentTime] = useState(new Date());
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
-
-    return () => clearInterval(intervalId);
-  }, []);
 
   const getData = async(chosenDate) => {
     try {
@@ -96,18 +88,9 @@ export default function ScheduleTable({ onUsernameChange }) {
 
   return (
     <Main>
-      <ScheduleControl>
-        <ControlTitle>
-          <h2>현재시간 {currentTime.toLocaleTimeString()}</h2>
-          <h3>일정 시작과 종료 시간을 기록해 보세요</h3>
-        </ControlTitle>
-        <ButtonDiv>          
-          <ButtonControl onClick={handleStartClick}>Start</ButtonControl>
-          <ButtonControl onClick={handleEndClick}>End</ButtonControl>
-        </ButtonDiv>
-      </ScheduleControl>
-
+      <ScheduleControl start={'시작'} end={'종료'} onClick1={handleStartClick} onClick2={handleEndClick} />
       <Schedule>
+
         <TableInfo>
           <DateDiv>
           <Title>Schedule of</Title>
@@ -180,55 +163,14 @@ export default function ScheduleTable({ onUsernameChange }) {
 };
 
 
-const Main = styled.div`
-  display: flex
-  flex: 1;
-  padding: 20px;
-`;
-
-const ScheduleControl = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  float: left;
-  align-items: center;
-  width: 35%;
-`;
-
-const ControlTitle = styled.div`
-  text-align: center;
-`;
-
-const ButtonDiv = styled.div`
-  display: flex;
-  margin-top: 30px;
-`;
-
-const ButtonControl = styled.button`
-  padding: 20px 10px;
-  font-size: 2 rem;
-  width: 120px;
-  cursor: pointer;
-  margin: 10px 10px;
-`;
-
 const Schedule = styled.div`
   display: flex;
   flex-direction: column;
   width: 63%;
-`;
 
-const Title = styled.div`
-  font-size: 32px;
-  font-weight: bold;
-  margin: 10px 20px 15px 0;
-`;
-
-const DateDiv = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  float: left;
-  align-items: center;
+  @media (max-width: 780px) {
+    width: 100%;
+  }
 `;
 
 const TableInfo = styled.div`
@@ -236,8 +178,33 @@ const TableInfo = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 380px) {
+    margin-top: 20px;
+    flex-direction: column;
+  }
 `;
 
+const DateDiv = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  float: left;
+  align-items: center;
+
+  @media (max-width: 380px) {
+    flex-direction: column;
+  }  
+`;
+
+const Title = styled.div`
+  font-size: 32px;
+  font-weight: bold;
+  margin: 10px 20px 15px 0;
+
+  @media (max-width: 380px) {
+    margin: 5px;
+  }
+`;
 
 const DateFilter = styled.div`
   display: flex;
@@ -258,6 +225,11 @@ const EditButton = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  @media (max-width: 380px) {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 `;
 
 const Button = styled.button`
@@ -270,7 +242,6 @@ const Table = styled.table`
   border-collapse: collapse;
   width: 100%;
   text-align: center;
-  // table-layout: fixed;
 
   th, td {
     width: 100px
@@ -278,12 +249,21 @@ const Table = styled.table`
     padding: 8px;
     border-bottom: 1px solid #ddd;
     text-align: center;
+
+    @media (max-width: 380px) {
+      padding: 4px;
+    }
   }
 
   th {
     background-color: #f2f2f2;
     color: #666;
-    font-weight: normal;
+    // font-weight: normal;
+
+    @media (max-width: 380px) {
+      font-size: 11px;
+      font-weight: bold;
+    }
   }
 
   th:nth-child(1) {
@@ -299,11 +279,15 @@ const Table = styled.table`
   } 
 
   th:nth-child(5) {
-    width: 15%;
+    width: 18%;
   }
 
   td {
     font-size: 14px;
+
+    @media (max-width: 380px) {
+      font-size: 11px;
+    }
   }
 
   tr:hover {

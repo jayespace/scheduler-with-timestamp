@@ -1,5 +1,5 @@
 echo "Swtiching to branch master"
-git checkout client-prod
+git checkout prod-test
 
 echo "Building app..."
 npm run build
