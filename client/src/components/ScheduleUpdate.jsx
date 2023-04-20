@@ -40,7 +40,7 @@ export default function UpdateModal({ id = '', handleUpdate }) {
   return (
     <>
       <Button 
-      onClick={id !== '' ? toggleModal : () => alert("스케줄을 먼저 선택해주세요")}>
+      onClick={id !== '' ? toggleModal : () => alert("스케줄을 선택해주세요")}>
         Edit
       </Button>
       {modal && (

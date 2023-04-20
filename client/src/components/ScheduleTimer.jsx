@@ -68,7 +68,6 @@ const ScheduleControlDiv = styled.div`
     float: center;
     margin: 0 auto;
   }
-
 `;
 
 const ControlTitleDiv = styled.div`

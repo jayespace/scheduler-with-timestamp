@@ -45,7 +45,7 @@ func CreateUser(c *gin.Context) {
 
 	if result.Error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Failed to create user",
+			"error": "다른 아이디로 가입해주세요",
 		})
 
 		return
@@ -53,7 +53,7 @@ func CreateUser(c *gin.Context) {
 
 	// Respond
 	c.JSON(200, gin.H{
-		"status": "success",
+		"status": "Success",
 	})
 }
 
@@ -78,7 +78,7 @@ func LogInUser(c *gin.Context) {
 
 	if user.ID == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Invalid Username or Password",
+			"error": "가입되어 있지 않은 사용자입니다",
 		})
 
 		return
@@ -89,7 +89,7 @@ func LogInUser(c *gin.Context) {
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Invalid Username or password",
+			"error": "비밀번호를 확인해 주세요",
 		})
 
 		return
@@ -117,7 +117,7 @@ func LogInUser(c *gin.Context) {
 	c.SetCookie("Authorization", tokenString, 1800, "/", "", false, true)
 
 	c.JSON(200, gin.H{
-		"status": "logged in",
+		"status": "Log In Success",
 	})
 }
 
@@ -135,6 +135,6 @@ func LogoutUser(c *gin.Context) {
 	c.SetCookie("Authorization", "", -1, "/", "", false, true)
 
 	c.JSON(200, gin.H{
-		"status": "Log Out sucess",
+		"status": "Log out Sucess",
 	})
 }

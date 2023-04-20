@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import styled from 'styled-components';
-import UpdateModal from './Update';
+import UpdateModal from './ScheduleUpdate';
 import * as Api from '../api'
 import { Main, ScheduleControl } from './ScheduleTimer'
 
@@ -49,7 +49,7 @@ export default function ScheduleTable({ onUsernameChange }) {
   const handleStartClick = async () => {
     try {
       await Api.post('/schedules');
-      alert('Success');
+      alert('일정이 시작되었습니다');
       getData(dateChosen);
     } catch (error) {
         alert(error.response.data.error);
@@ -60,7 +60,7 @@ export default function ScheduleTable({ onUsernameChange }) {
     try {
       await Api.patch('/schedules');
       getData(dateChosen);
-      alert('Success');
+      alert('일정이 종료되었습니다');
     } catch (error) {
         alert(error.response.data.error);
     }
@@ -71,7 +71,7 @@ export default function ScheduleTable({ onUsernameChange }) {
       setSelectedSchedule(scheduleId)
       const { data } = await Api.delete('/schedules', scheduleId)
       getData(data.date);
-      alert('Success');
+      alert('일정이 삭제되었습니다');
     } catch (error) {
         alert(error.response.data.error);
     }
@@ -90,7 +90,6 @@ export default function ScheduleTable({ onUsernameChange }) {
     <Main>
       <ScheduleControl start={'시작'} end={'종료'} onClick1={handleStartClick} onClick2={handleEndClick} />
       <Schedule>
-
         <TableInfo>
           <DateDiv>
           <Title>Schedule of</Title>
@@ -114,7 +113,6 @@ export default function ScheduleTable({ onUsernameChange }) {
             >Delete</Button>
           </EditButton>
         </TableInfo>
-
         <Table>
           <thead>
             <tr>
@@ -142,7 +140,7 @@ export default function ScheduleTable({ onUsernameChange }) {
                 <td>{schedule.CreatedTime}</td>
                 <td>{schedule.EndedTime}</td>
                 <td>{schedule.DurationInMin >= 60 
-                  ? `${Math.floor(schedule.DurationInMin/60)}시간 ${schedule.DurationInMin%60}분`
+                  ? `${Math.floor(schedule.DurationInMin/60)}시간${schedule.DurationInMin%60}분`
                   : `${schedule.DurationInMin}분`
                 }</td>
                 <td>{schedule.Description}</td>
@@ -258,7 +256,6 @@ const Table = styled.table`
   th {
     background-color: #f2f2f2;
     color: #666;
-    // font-weight: normal;
 
     @media (max-width: 380px) {
       font-size: 11px;

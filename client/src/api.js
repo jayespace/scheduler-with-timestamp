@@ -2,8 +2,6 @@ import axios from 'axios';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
-// axios.defaults.withCredentials = true;
-
 async function get(endpoint, query='') {
   console.log(`GET 요청 ${`${apiUrl + endpoint}`}`);
 
@@ -48,7 +46,7 @@ async function del(endpoint, params='') {
   console.log(`DELETE 요청: ${apiUrl + endpoint}`);
 
   if (params === '') {
-    alert("스케줄을 먼저 선택해주세요")
+    alert("스케줄을 선택해주세요")
     return
   }
 

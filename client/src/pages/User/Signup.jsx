@@ -24,10 +24,10 @@ export default function Signup() {
         const data = { username, password };
         await Api.post(`/users/signup`, data);
         alert(`가입이 완료되었습니다\n서비스 이용을 위해 로그인을 해주세요`);
-        navigate('/', { replace: true });
+        navigate('/login', { replace: true });
       } catch (error) {
         console.log('회원가입 실패', error);
-        alert("아이디와 비밀번호를 확인 후 다시 시도해주세요"); 
+        alert(error.response.data.error);
       }
     }
   };

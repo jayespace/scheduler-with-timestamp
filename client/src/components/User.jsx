@@ -66,7 +66,6 @@ const Title = styled.h2`
   @media (max-width: 380px) {
     margin-left: 60px;
   }
-
 `;
 
 const InputBox = styled.form`

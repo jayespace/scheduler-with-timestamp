@@ -19,17 +19,12 @@ func init() {
 func main() {
 	r := gin.Default()
 
-	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{os.Getenv("CLIENT_URL")}
-	config.AllowCredentials = true
-	r.Use(cors.Default())
-
-	// r.Use(cors.New(cors.Config{
-	// 	AllowOrigins:     []string{os.Getenv("CLIENT_URL")},
-	// 	AllowMethods:     []string{"GET", "POST", "PATCH", "DELETE", "OPTIONS"},
-	// 	AllowHeaders:     []string{"content-Type", "Authorization"},
-	// 	AllowCredentials: true,
-	// }))
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{os.Getenv("CLIENT_URL")},
+		AllowMethods:     []string{"GET", "POST", "PATCH", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"content-Type", "Authorization"},
+		AllowCredentials: true,
+	}))
 
 	r.POST("api/schedules", middlewares.RequiredAuth, controllers.CreateSchedule)
 	r.GET("api/schedules", middlewares.RequiredAuth, controllers.GetSchedules)

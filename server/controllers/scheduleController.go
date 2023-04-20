@@ -21,7 +21,7 @@ func CreateSchedule(c *gin.Context) {
 
 	if lastEntry.Error == nil && !checkStatus {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Schedule must be ended before start ",
+			"error": "End the schedule first",
 		})
 		return
 	}
@@ -37,8 +37,7 @@ func CreateSchedule(c *gin.Context) {
 	}
 	// Return it
 	c.JSON(200, gin.H{
-		"date":   dateNow,
-		"status": "success",
+		"date": dateNow,
 	})
 }
 
@@ -93,6 +92,8 @@ func GetSchedules(c *gin.Context) {
 			Description:   s.Description,
 		})
 	}
+
+	fmt.Println(response)
 
 	initializers.DB.Select("date_local").Where("user_id = ?", userId).Order("created_at asc").Find(&schedules)
 
@@ -151,7 +152,6 @@ func UpdateDescription(c *gin.Context) {
 	// Respond with it
 	c.JSON(200, gin.H{
 		"date": dateChosen,
-		// "status": "sucess",
 	})
 }
 
@@ -162,11 +162,10 @@ func UpdateEndTime(c *gin.Context) {
 
 	var schedule models.Schedule
 	lastEntry := initializers.DB.Where("user_id = ?", userId).Last(&schedule)
-	fmt.Println("error is", lastEntry.Error)
 
 	if lastEntry.Error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Start scheduling by clicking start",
+			"error": "Start the schedule first",
 		})
 		return
 	}
@@ -175,7 +174,7 @@ func UpdateEndTime(c *gin.Context) {
 
 	if checkStatus {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Create a schedule first",
+			"error": "Start the schedule first",
 		})
 		return
 	}
@@ -197,7 +196,6 @@ func UpdateEndTime(c *gin.Context) {
 	// Respond with it
 	c.JSON(200, gin.H{
 		"date": dateNow,
-		// "schedule": schedule,
 	})
 }
 

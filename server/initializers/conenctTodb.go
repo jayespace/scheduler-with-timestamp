@@ -19,7 +19,7 @@ func ConnectToDb() {
 	password := os.Getenv("DB_PASSWORD")
 	dbname := os.Getenv("DB_DBNAME")
 
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=5432 sslmode=disable TimeZone=Asia/Tokyo", host, user, password, dbname)
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=5432 sslmode=disable", host, user, password, dbname)
 	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if err != nil {
