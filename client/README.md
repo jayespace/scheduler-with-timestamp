@@ -1,70 +1,25 @@
-# Getting Started with Create React App
+# Scheduler with timestamp
+It is available to access service : [Schedule Manager](http://35.230.6.124)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<br>
 
-## Available Scripts
+## Client Feature
 
-In the project directory, you can run:
+- useEffect hook으로 현재 시간과 스케줄 업데이트 기능을 구현 하였습니다.
+- component 구현으로 코드 재사용을 하였습니다.
+- 메모 수정 기능은 modal로 만들어 간편하게 사용 할 수 있습니다.
+- media query를 적용하여 모바일에서도 불편함 없이 사용할 수 있습니다.
 
-### `npm start`
+<br>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Demo
+|  Responsive design                                                                     |    Greeting User |
+|:--------------------------------------------------------------------------------------:|:----------------:|
+| ![](https://github.com/jayespace/scheduler-with-timestamp/blob/main/client/gif/responsive.gif) |![](https://github.com/jayespace/scheduler-with-timestamp/blob/main/client/gif/userlogin.gif) |
+| 데스크탑은 물론 모바일에서도 사용할 수 있도록<br>유저 친화적인 사이트로 디자인 하였습니다 | 로그인 후에 아이디를 나타내어<br>현재 로그인 중이라는 것을 표현하였습니다 |
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+| Time Start & End  |  Search by date & Edit & Delete |
+|:--------------------------------------------------------------------------------------:|:-------------:|
+|![](https://github.com/jayespace/scheduler-with-timestamp/blob/main/client/gif/startend.gif)|![](https://github.com/jayespace/scheduler-with-timestamp/blob/main/client/gif/scheduler.gif)|
+| 버튼 클릭으로 시작과 종료시간을 테이블에 기록하고<br>종료 후에는 소요시간을 보여줍니다 | Toggle 버튼으로 날짜를 선택하여 일별 조회를 할수 있고<br> 메모수정과 삭제도 간단합니다 |
