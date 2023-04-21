@@ -4,6 +4,11 @@ It is available to access service : [Schedule Manager](http://35.230.6.124)
 <br>
 
 ## Client Feature
+<p>
+  <img src="https://img.shields.io/badge/React-black?style=for-the-badge&logo=react&logoColor=61DAFB"/>
+  <img src="https://img.shields.io/badge/Javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/>
+  <img src="https://img.shields.io/badge/styled component-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white"/>
+</p>
 
 - useEffect hook으로 현재 시간과 스케줄 업데이트 기능을 구현 하였습니다.
 - component 구현으로 코드 재사용을 하였습니다.
