@@ -177,7 +177,7 @@ const TableInfo = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  @media (max-width: 380px) {
+  @media (max-width: 510px) {
     margin-top: 20px;
     flex-direction: column;
   }
@@ -224,9 +224,9 @@ const EditButton = styled.div`
   flex-direction: row;
   align-items: center;
 
-  @media (max-width: 380px) {
-    margin-top: 10px;
-    margin-bottom: 10px;
+  @media (max-width: 510px) {
+    margin-top: 5px;
+    margin-bottom: 15px;
   }
 `;
 
