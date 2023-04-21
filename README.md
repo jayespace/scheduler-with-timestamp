@@ -16,14 +16,15 @@ It is available to access service : [Schedule Manager](http://35.230.6.124)
   
 ## Functionality
 
-1. 일정의 시작과 종료 시간을 버튼 하나로 체크할 수 있습니다.
-2. 종료 버튼을 누르면 해당 일정의 소요시간을 확인 할 수 있습니다.
-3. 어떤 일정을 진행하였는지 메모를 남길 수 있고, 수정할 수 있습니다.
-4. 선택한 일정을 삭제할 수 있습니다.    
+- 일정의 시작과 종료 시간을 버튼 하나로 체크할 수 있습니다.
+- 종료 버튼을 누르면 해당 일정의 소요시간을 확인 할 수 있습니다.
+- 어떤 일정을 진행하였는지 메모를 남길 수 있고, 수정할 수 있습니다.
+- 선택한 일정을 삭제할 수 있습니다.    
 
 
 ### More Info about
-- Client(FrontEnd) _Click [Here](https://github.com/jayespace/scheduler-with-timestamp/blob/main/client/README.md)_  
+- Client (FrontEnd) _Click [Here](https://github.com/jayespace/scheduler-with-timestamp/blob/main/client/README.md)_  
+- Server (BackEnd) _Click [Here](https://github.com/jayespace/scheduler-with-timestamp/blob/main/server/README.md)_
 
 <br>
 
@@ -33,8 +34,6 @@ It is available to access service : [Schedule Manager](http://35.230.6.124)
   <img src="https://img.shields.io/badge/React-black?style=for-the-badge&logo=react&logoColor=61DAFB"/>
   <img src="https://img.shields.io/badge/Javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/>
   <img src="https://img.shields.io/badge/styled component-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white"/>
-</p>
-<p>
   <img src="https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=black"/>
   <img src="https://img.shields.io/badge/Gin-13448F?style=for-the-badge&logo=&logoColor=black"/>
   <img src="https://img.shields.io/badge/gorm-26689A?style=for-the-badge&logo=&logoColor=white"/>
@@ -44,5 +43,4 @@ It is available to access service : [Schedule Manager](http://35.230.6.124)
    <img src="https://img.shields.io/badge/google compute engine-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white"/>
    <img src="https://img.shields.io/badge/nginx-009639?style=for-the-badge&logo=nginx&logoColor=white"/>
    <img src="https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"/>
-
 </p>
