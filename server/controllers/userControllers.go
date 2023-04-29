@@ -98,7 +98,7 @@ func LogInUser(c *gin.Context) {
 	// Generate a jwt token
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"sub": user.ID,
-		"exp": time.Now().Add(time.Minute * 30).Unix(),
+		"exp": time.Now().Add(time.Hour * 24).Unix(),
 	})
 
 	// Sign and get the complete encoded token as a string using the secret
@@ -114,7 +114,7 @@ func LogInUser(c *gin.Context) {
 
 	// Set up the cookie and send it back
 	c.SetSameSite(http.SameSiteLaxMode)
-	c.SetCookie("Authorization", tokenString, 1800, "/", "", false, true)
+	c.SetCookie("Authorization", tokenString, 86400, "/", "", false, true)
 
 	c.JSON(200, gin.H{
 		"status": "Log In Success",
